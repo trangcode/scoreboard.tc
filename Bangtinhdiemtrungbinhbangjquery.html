@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset ="UTF-8">
+    <meta name ="viewport" content ="width=device-width, initial-scale =1.0"> 
+    <title>Bảng điểm</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            border-radius: 1px;
+        }
+
+        * { margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        p input {
+            text-align: left;
+            border-radius: 10px;
+            padding: 3px;
+        }
+        h1 {
+            font-size: 55px;
+            background-color: #bfc5fd;
+            color:rgb(234, 236, 208);
+            padding: 15px;
+            text-shadow: 2px 2px #FF0000;
+        }
+        button {
+            padding: 5px 20px;
+            font-size: 15px;
+        }
+        .redWarn {color: rgb(189, 24, 79);}
+        .success {color: rgb(3, 151, 3);}
+        #nhap_Enter {
+            padding: 3px 40px;
+            font-size: 20px;
+            color: rgb(216, 118, 38) ; 
+        }
+        @media only screen and (max-width: 378px) {
+            h1 {font-size: 40px;}
+        }
+        @media only screen and (max-width: 320px) {
+            h1 {font-size: 35px;}
+        }
+        @media only screen and (max-width: 280px) {
+            h1 {font-size: 28px;}
+        }
+    </style>
+    <script type = "text/javascript" src = "jquery.js"></script>
+    <script>
+        var stt= 0;
+        $(document).ready(function() {
+
+            //chen cac su kien click
+            $("input").on({
+                mouseenter : function() {
+                    $(this).css("background-color","#FEF34C");
+                },
+                mouseleave : function() {
+                    $(this).css("background-color","white");
+                },
+                click : function() {
+                    $(this).css("background-color","#FED671");
+                }
+            });
+            
+            // lay du lieu tu input
+            $("#nhap_Enter").click(function() {
+                var name = $("#name_Input").val();
+                var toan = $("#toan_Input").val();
+                var ly = $("#ly_Input").val();
+                var hoa = $("#hoa_Input").val();
+                var warnText = "Nhập vào đây nữa nha!";
+                if(name.length == 0 && toan.length == 0 && hoa.length == 0 && ly.length == 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                }
+                else if(name.length != 0 && toan.length == 0 && hoa.length == 0 && ly.length == 0)  {
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                }
+                else if(name.length == 0 && toan.length != 0 && hoa.length == 0 && ly.length == 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                }
+                else if(name.length == 0 && toan.length == 0 && hoa.length != 0 && ly.length == 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                }
+                else if(name.length == 0 && toan.length == 0 && hoa.length == 0 && ly.length != 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                }
+                else if(name.length != 0 && toan.length != 0 && hoa.length == 0 && ly.length == 0) {
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                }
+                else if(name.length == 0 && toan.length != 0 && hoa.length != 0 && ly.length == 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length == 0 && toan.length == 0 && hoa.length != 0 && ly.length != 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length != 0 && toan.length == 0 && hoa.length == 0 && ly.length != 0) {
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length == 0 && toan.length != 0 && hoa.length == 0 && ly.length != 0) {
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length != 0 && toan.length == 0 && hoa.length != 0 && ly.length == 0) {
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length != 0 && toan.length != 0 && hoa.length != 0 && ly.length == 0) {
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                    $("#warn_Ly").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length == 0 && toan.length != 0 && hoa.length != 0 && ly.length != 0) {
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                    $("#warn_Name").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length != 0 && toan.length == 0 && hoa.length != 0 && ly.length != 0) {
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                    $("#warn_Toan").html(warnText).addClass("redWarn");
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html("Điền thành công!").addClass("success");
+                }
+                else if(name.length != 0 && toan.length != 0 && hoa.length == 0 && ly.length != 0) {
+                    $("#warn_Name").html("Điền thành công!").addClass("success");
+                    $("#warn_Hoa").html(warnText).addClass("redWarn");
+                    $("#warn_Toan").html("Điền thành công!").addClass("success");
+                    $("#warn_Ly").html("Điền thành công!").addClass("success");
+                }
+                else {
+                    $("#warn_Name").html("");
+                    $("#warn_Toan").html("");
+                    $("#warn_Ly").html("");
+                    $("#warn_Hoa").html("");
+                    $("#done").html("Điền thành công!").addClass("success");
+                    setTimeout(function(){
+                        $("#done").hide();
+                    },1000);
+                  
+                
+                //input sẽ rỗng sau khi an nhap
+                $("#name_Input").val("");
+                $("#toan_Input").val("");
+                $("#ly_Input").val("");
+                $("#hoa_Input").val("");
+                var tb = "?";
+                ++stt;
+               
+                //them <td>
+                $("#table").append("<tr><td>" + stt + "</td><td>" + name + "</td><td>"+ toan + "</td><td>" + ly + "</td><td>" + hoa + "</td><td>"+ tb +"</td></tr>"); 
+                }              
+            });  
+
+            //xoa hang
+            $("#remove").click(function() {
+                $("tr:last").remove();
+            });
+
+            //tinh diem trung binh
+            $("#dTB_Button").click(function() {
+                $("#table tr").each(function(){
+                    var toan = Number($(this).find("td").eq(2).html());
+                    var ly = Number($(this).find("td").eq(3).html());
+                    var hoa = Number($(this).find("td").eq(4).html());
+                    var tb = (toan+hoa+ly)/3;
+                    $(this).find("td").eq(5).html(tb.toFixed(1));
+                });  
+            });
+
+            //xac nhan hoc sinh gioi
+            $("#xacNhan_Button").click(function(){
+                $("#table tr").each(function(){
+                var check = $(this).find("td").eq(5).html();
+                if(check >= 8.0) {
+                    $(this).css("color","red");
+                }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+        <h1> Class Marksheet </h1><br><br>
+    <form id="form">
+        <p> Họ tên <input type="text" id="name_Input"><span> </span><span id = "warn_Name"></span></p><br>
+        <p> Điểm toán <input type="number" id="toan_Input"><span> </span><span id = "warn_Toan"></span></p><br>
+        <p> Điểm lý <input type="number" id="ly_Input"><span> </span><span id = "warn_Ly"></span></p><br>
+        <p> Điểm hóa <input type="number" id="hoa_Input"><span> </span><span id = "warn_Hoa"></span></p><br>
+        <p id = "done"></p>
+    </form><br>
+    <button type="button" id ="remove">Xóa hàng</button>
+    <button type="button" id ="nhap_Enter">Nhập</button><br><br><br><br>
+    
+    <!--bang table-->
+    <table id="table">
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Toán</th>
+                <th>Lý</th>
+                <th>Hóa</th>
+                <th>Trung bình</th>
+            </tr>
+    </table>
+    <br>
+    <button type ="button" id ="dTB_Button" > Tính điểm trung bình</button>
+    <button type ="button" id ="xacNhan_Button" > Xác định học sinh giỏi (Đỏ)</button>
+    <p id="demo"></p>
+
+
+</body>
+
+</html>
